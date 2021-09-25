@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-theme-minimal",
+  "name": "gatsby-theme-lime",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
+  "author": "panchao5 <panchao626@outlook.com> (@panchao5)",
   "license": "MIT",
   "peerDependencies": {
     "gatsby": "^3.3.0"
