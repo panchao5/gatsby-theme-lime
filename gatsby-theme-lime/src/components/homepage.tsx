@@ -1,7 +1,17 @@
-import * as React from "react";
+import tw, { styled } from "twin.macro";
+import { PageProps } from "gatsby";
+import Layout from "./layout";
 
-export default function Homepage(props) {
-  const { data }: { data: any } = props;
-  console.log(props);
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+const Container = styled.div(tw`flex-row justify-center`);
+
+export default function Homepage(props: PageProps<any>) {
+  const { data } = props;
+
+  return (
+    <Layout>
+      <Container>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      </Container>
+    </Layout>
+  );
 }

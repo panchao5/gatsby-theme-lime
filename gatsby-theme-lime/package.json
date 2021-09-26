@@ -8,8 +8,13 @@
     "gatsby": "^3.3.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/typography": "^0.4.1",
+    "gatsby-plugin-emotion": "^6.14.0",
     "gatsby-plugin-image": "^1.14.0",
     "gatsby-plugin-mdx": "^2.14.0",
     "gatsby-plugin-sharp": "^3.14.0",
@@ -17,6 +22,9 @@
     "gatsby-source-filesystem": "^3.14.0",
     "gatsby-transformer-sharp": "^3.14.0",
     "limax": "^3.0.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "prism-react-renderer": "^1.2.1",
+    "tailwindcss": "^2.2.15",
+    "twin.macro": "^2.7.0"
   }
 }
