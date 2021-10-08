@@ -1,3 +1,11 @@
+interface LimeConfig {
+  basePath: string;
+  blogPath: string;
+  postsPath: string;
+  pagesPath: string;
+  tagsPath: string;
+}
+
 type PostTag = {
   name: string;
   slug: string;

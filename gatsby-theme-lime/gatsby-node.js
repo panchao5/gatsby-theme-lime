@@ -1,5 +1,6 @@
 const path = require("path");
 const _ = require("lodash");
+const normalize = require("normalize-path");
 const slugify = require("./utils/slugify");
 const withDefaults = require("./utils/default-options");
 
@@ -224,7 +225,7 @@ exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
     parent: null,
     children: [],
     internal: {
-      type: `LimeBlogConfig`,
+      type: `LimeConfig`,
       contentDigest: createContentDigest(limeConfig),
       content: JSON.stringify(limeConfig),
       description: `Options for gatsby-theme-lime`,
@@ -321,6 +322,7 @@ exports.onCreateNode = async (
 };
 
 const homepageTemplate = require.resolve(`./src/templates/homepage.tsx`);
+const postPageTemplate = require.resolve(`./src/templates/post-page.tsx`);
 
 /**
  * @type {import("gatsby").GatsbyNode["createPages"]}
@@ -328,10 +330,39 @@ const homepageTemplate = require.resolve(`./src/templates/homepage.tsx`);
 exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
   const { createPage } = actions;
 
-  const { basePath, blogPath, tagsPath } = withDefaults(themeOptions);
+  const { basePath, blogPath, tagsPath, postsPrefix } =
+    withDefaults(themeOptions);
 
   createPage({
     path: basePath,
     component: homepageTemplate,
+  });
+
+  const result = await graphql(`
+    query {
+      allPost(sort: { fields: [date], order: DESC }) {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running Graphql query.`, result.errors);
+    return;
+  }
+
+  const posts = result.data.allPost.nodes;
+
+  posts.forEach((post) => {
+    createPage({
+      path: normalize(`/${blogPath}/${post.slug}`),
+      component: postPageTemplate,
+      context: {
+        id: post.id,
+      },
+    });
   });
 };

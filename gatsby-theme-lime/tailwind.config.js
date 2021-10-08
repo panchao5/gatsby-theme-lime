@@ -45,9 +45,6 @@ module.exports = {
       }),
     },
   },
-  variants: {
-    extend: {},
-  },
   plugins: [
     plugin(function ({ theme, addUtilities, addComponents }) {
       addUtilities(
