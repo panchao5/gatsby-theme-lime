@@ -5,18 +5,9 @@ export default HomepageComponent;
 
 export const query = graphql`
   query {
-    allPost(sort: { fields: date, order: DESC }, limit: 3) {
+    allPost(sort: { fields: date, order: DESC }, limit: 5) {
       nodes {
-        slug
-        title
-        date
-        excerpt
-        timeToRead
-        description
-        tags {
-          name
-          slug
-        }
+        ...PostPreview
       }
     }
   }

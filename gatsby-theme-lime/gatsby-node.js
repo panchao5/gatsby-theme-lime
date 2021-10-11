@@ -208,7 +208,7 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
  */
 exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
   const { createNode } = actions;
-  const { basePath, blogPath, postsPath, pagesPath, tagsPath } =
+  const { basePath, blogPath, postsPath, pagesPath, resourcesPath, tagsPath } =
     withDefaults(themeOptions);
 
   const limeConfig = {
@@ -216,6 +216,7 @@ exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
     blogPath,
     postsPath,
     pagesPath,
+    resourcesPath,
     tagsPath,
   };
 
@@ -364,5 +365,40 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
         id: post.id,
       },
     });
+  });
+};
+
+/**
+ * @type {import("gatsby".GatsbyNode["createResolvers"])}
+ */
+exports.createResolvers = ({ createResolvers }) => {
+  createResolvers({
+    SiteSiteMetadata: {
+      authorAvatar: {
+        type: "File",
+        async resolve(source, args, context, info) {
+          if (!source.authorAvatarPath) {
+            return null;
+          }
+          const fileNodes = await context.nodeModel.runQuery({
+            query: {
+              filter: {
+                absolutePath: {
+                  eq: source.authorAvatarPath,
+                },
+              },
+            },
+            type: "File",
+            firstOnly: false,
+          });
+
+          if (!fileNodes) {
+            return null;
+          }
+
+          return fileNodes[0];
+        },
+      },
+    },
   });
 };

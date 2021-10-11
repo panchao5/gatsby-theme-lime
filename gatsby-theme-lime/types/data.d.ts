@@ -3,23 +3,24 @@ interface LimeConfig {
   blogPath: string;
   postsPath: string;
   pagesPath: string;
+  resourcesPath: string;
   tagsPath: string;
+}
+
+interface SiteMetadata {
+  siteUrl: string;
+  siteTitle: string;
+  author: string;
+  authorBio?: string;
+  authorPath?: string;
+  authorAvatar: any;
+  socialLinks?: Array<{ name: string; link: string }>;
 }
 
 type PostTag = {
   name: string;
   slug: string;
 };
-
-interface PreviewPost {
-  slug: string;
-  title: string;
-  draft?: boolean;
-  tags: Array<PostTag>;
-  date?: string;
-  description?: string;
-  excerpt: string;
-}
 
 interface Post {
   slug: string;
@@ -35,3 +36,8 @@ interface Post {
   html: string;
   canonicalUrl: string;
 }
+
+type PostPreview = Pick<
+  Post,
+  "slug" | "title" | "draft" | "tags" | "description" | "excerpt"
+>;

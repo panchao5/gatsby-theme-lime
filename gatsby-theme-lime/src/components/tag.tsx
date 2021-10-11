@@ -36,3 +36,5 @@ const Tag = (props: TagProps) => {
 };
 
 export default Tag;
+
+export const TagList = styled.div(tw`space-x-2`);

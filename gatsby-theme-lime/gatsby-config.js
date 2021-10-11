@@ -23,6 +23,13 @@ module.exports = (themeOptions) => {
           path: options.pagesPath,
         },
       },
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          name: options.resourcesPath,
+          path: options.resourcesPath,
+        },
+      },
       "gatsby-plugin-image",
       "gatsby-transformer-sharp",
       "gatsby-plugin-sharp",

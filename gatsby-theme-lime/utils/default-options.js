@@ -3,6 +3,7 @@ module.exports = (themeOptions) => {
   const blogPath = themeOptions.blogPath || `/blog`;
   const postsPath = themeOptions.postsPath || `content/posts`;
   const pagesPath = themeOptions.pagesPath || `content/pages`;
+  const resourcesPath = themeOptions.resourcesPath || `content/resources`;
   const tagsPath = themeOptions.tagsPath || `/tags`;
 
   return {
@@ -10,6 +11,7 @@ module.exports = (themeOptions) => {
     blogPath,
     postsPath,
     pagesPath,
+    resourcesPath,
     tagsPath,
   };
 };
