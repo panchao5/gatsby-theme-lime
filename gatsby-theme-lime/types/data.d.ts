@@ -5,7 +5,13 @@ interface LimeConfig {
   pagesPath: string;
   resourcesPath: string;
   tagsPath: string;
+  navigation: NavigationEntry[];
 }
+
+type NavigationEntry = {
+  title: string;
+  slug: string;
+};
 
 interface SiteMetadata {
   siteUrl: string;

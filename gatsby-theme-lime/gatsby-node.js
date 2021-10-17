@@ -96,6 +96,21 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
       excerpt(pruneLength: Int = 160): String!
       body: String!
     }
+
+    type LimeConfig implements Node {
+      basePath: String
+      blogPath: String
+      postsPath: String
+      pagesPath: String
+      resourcesPath: String
+      tagsPath: String
+      navigation: [NavigationEntry]
+    }
+    
+    type NavigationEntry {
+      title: String
+      slug: String
+    }
   `,
     schema.buildObjectType({
       name: "MdxPost",
@@ -208,8 +223,15 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
  */
 exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
   const { createNode } = actions;
-  const { basePath, blogPath, postsPath, pagesPath, resourcesPath, tagsPath } =
-    withDefaults(themeOptions);
+  const {
+    basePath,
+    blogPath,
+    postsPath,
+    pagesPath,
+    resourcesPath,
+    tagsPath,
+    navigation,
+  } = withDefaults(themeOptions);
 
   const limeConfig = {
     basePath,
@@ -218,6 +240,7 @@ exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
     pagesPath,
     resourcesPath,
     tagsPath,
+    navigation,
   };
 
   createNode({

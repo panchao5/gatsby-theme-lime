@@ -10,6 +10,10 @@ export const useLimeConfig = () => {
         pagesPath
         resourcesPath
         tagsPath
+        navigation {
+          title
+          slug
+        }
       }
     }
   `);

@@ -5,6 +5,7 @@ module.exports = (themeOptions) => {
   const pagesPath = themeOptions.pagesPath || `content/pages`;
   const resourcesPath = themeOptions.resourcesPath || `content/resources`;
   const tagsPath = themeOptions.tagsPath || `/tags`;
+  const navigation = themeOptions.navigation || [];
 
   return {
     basePath,
@@ -13,5 +14,6 @@ module.exports = (themeOptions) => {
     pagesPath,
     resourcesPath,
     tagsPath,
+    navigation,
   };
 };
