@@ -10,7 +10,9 @@ type HomepageData = {
   };
 };
 
-const Container = styled.div(tw`md:flex flex-row justify-center items-start`);
+const Container = styled.div(
+  tw`mt-4 md:px-4 md:flex flex-row justify-center items-start`
+);
 
 export default function Homepage(props: PageProps<HomepageData>) {
   const {
