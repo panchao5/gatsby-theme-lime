@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import tw from "twin.macro";
 import { usePrismTheme } from "./prism-theming";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import Card, { CardContent } from "./card";
+import Card from "./card";
 
 const Header = ({ children }: { children: ReactNode }) => {
   return (
@@ -39,16 +39,14 @@ const Playground = ({ children }: { children: string }) => {
   const prismTheme = usePrismTheme();
   return (
     <Card rounded>
-      <CardContent tw="p-0">
-        <LiveProvider
-          code={children.replace(/\n$/, "")}
-          theme={prismTheme}
-          noInline
-        >
-          <EditorWithHeader />
-          <ResultWithHeader />
-        </LiveProvider>
-      </CardContent>
+      <LiveProvider
+        code={children.replace(/\n$/, "")}
+        theme={prismTheme}
+        noInline
+      >
+        <EditorWithHeader />
+        <ResultWithHeader />
+      </LiveProvider>
     </Card>
   );
 };

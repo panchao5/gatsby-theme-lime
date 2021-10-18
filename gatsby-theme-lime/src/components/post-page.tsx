@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 import { Link, PageProps } from "gatsby";
 import Layout from "./layout";
-import Card, { CardContent } from "./card";
+import Card from "./card";
 import Alert from "./alert";
 import Tag from "./tag";
 import mdxComponents from "./mdx-components";
@@ -34,46 +34,41 @@ const PostPage = ({ data }: PageProps<PostPageData>) => {
   return (
     <Layout>
       <Container>
-        <Card rounded css={tw`p-0 lt-md:(rounded-none shadow-none)`}>
-          <CardContent tw="p-0">
-            {banner && <GatsbyImage image={banner} alt="" />}
-            <MDXProvider components={mdxComponents}>
-              <Article>
-                <header>
-                  {post.draft && (
-                    <Alert tw="text-sm mb-2" variant="warning">
-                      作者正在努力创作本篇博文中，敬请期待！
-                    </Alert>
-                  )}
-                  <Title>{post.title}</Title>
-                  <Meta>发布于 {post.date}</Meta>
-                </header>
-                <Content>
-                  {post.description && (
-                    <Alert tw="my-4" variant="info">
-                      {post.description}
-                    </Alert>
-                  )}
-                  <MDXRenderer>{post.body}</MDXRenderer>
-                </Content>
-
-                {showTags && (
-                  <footer>
-                    <div tw="mt-4 space-x-2">
-                      {post.tags.map((tag) => (
-                        <Link
-                          key={tag.name}
-                          to={normalize(`/posts/${tag.slug}`)}
-                        >
-                          <Tag tag={tag.name} />
-                        </Link>
-                      ))}
-                    </div>
-                  </footer>
+        <Card rounded css={tw`lt-md:(rounded-none shadow-none)`}>
+          {banner && <GatsbyImage image={banner} alt="" />}
+          <MDXProvider components={mdxComponents}>
+            <Article>
+              <header>
+                {post.draft && (
+                  <Alert tw="text-sm mb-2" variant="warning">
+                    作者正在努力创作本篇博文中，敬请期待！
+                  </Alert>
                 )}
-              </Article>
-            </MDXProvider>
-          </CardContent>
+                <Title>{post.title}</Title>
+                <Meta>发布于 {post.date}</Meta>
+              </header>
+              <Content>
+                {post.description && (
+                  <Alert tw="my-4" variant="info">
+                    {post.description}
+                  </Alert>
+                )}
+                <MDXRenderer>{post.body}</MDXRenderer>
+              </Content>
+
+              {showTags && (
+                <footer>
+                  <div tw="mt-4 space-x-2">
+                    {post.tags.map((tag) => (
+                      <Link key={tag.name} to={normalize(`/posts/${tag.slug}`)}>
+                        <Tag tag={tag.name} />
+                      </Link>
+                    ))}
+                  </div>
+                </footer>
+              )}
+            </Article>
+          </MDXProvider>
         </Card>
       </Container>
     </Layout>
