@@ -34,8 +34,8 @@ module.exports = {
         DEFAULT: {
           css: {
             pre: {
-              color: "var(--pre-color, #393A34)",
-              backgroundColor: "var(--pre-bgcolor, #f6f8fa)",
+              color: "var(--lime-pre-color, #393A34)",
+              backgroundColor: "var(--lime-pre-bgcolor, #f6f8fa)",
             },
             code: {
               color: theme("colors.secondary.400"),
@@ -50,12 +50,13 @@ module.exports = {
       addUtilities(
         {
           ".styled-underline": {
-            "--underline-color": theme("colors.primary.400"),
-            "--underline-width": "0.25em",
+            "--lime-underline-color": theme("colors.primary.400"),
+            "--lime-underline-width": "0.25em",
             background:
-              "linear-gradient(90deg, var(--underline-color) 0, var(--underline-color) 100%) no-repeat",
-            "background-size": "90% var(--underline-width)",
-            "background-position": "left calc(1em - var(--underline-width))",
+              "linear-gradient(90deg, var(--lime-underline-color) 0, var(--lime-underline-color) 100%) no-repeat",
+            "background-size": "90% var(--lime-underline-width)",
+            "background-position":
+              "left calc(1em - var(--lime-underline-width))",
           },
         },
         {

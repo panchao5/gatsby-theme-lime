@@ -22,7 +22,7 @@ interface CodeBlockProps {
 }
 
 const Container = styled.div(
-  tw`my-4 rounded-md shadow overflow-hidden --code-line-padding[1rem]`
+  tw`my-4 rounded-md shadow overflow-hidden --lime-code-line-padding[1rem]`
 );
 
 const Header = styled.div(
@@ -32,7 +32,7 @@ const Header = styled.div(
 const Content = styled.div(tw`relative`);
 
 const CopyButton = styled.button(
-  tw`absolute px-2 text-sm text-white bg-black bg-opacity-30 rounded-sm top-[calc(var(--code-line-padding) / 2)] right-[calc(var(--code-line-padding) / 2)]`
+  tw`absolute px-2 text-sm text-white bg-black bg-opacity-30 rounded-sm top-[calc(var(--lime-code-line-padding) / 2)] right-[calc(var(--lime-code-line-padding) / 2)]`
 );
 
 const CodeBlock = (props: CodeBlockProps) => {
@@ -95,7 +95,7 @@ const CodeBlock = (props: CodeBlockProps) => {
                     <span
                       css={
                         isHighlight &&
-                        tw`block bg-gray-400 bg-opacity-10 mx-[calc(-1 * var(--code-line-padding))] px-[var(--code-line-padding)]`
+                        tw`block bg-gray-400 bg-opacity-10 mx-[calc(-1 * var(--lime-code-line-padding))] px-[var(--lime-code-line-padding)]`
                       }
                       {...lineProps}
                     >

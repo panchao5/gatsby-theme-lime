@@ -16,7 +16,9 @@ const ResultWithHeader = () => {
   return (
     <div>
       <Header>Result</Header>
-      <div css={tw`p-4 text-[var(--pre-color)] bg-[var(--pre-bgcolor)]`}>
+      <div
+        css={tw`p-4 text-[var(--lime-pre-color)] bg-[var(--lime-pre-bgcolor)]`}
+      >
         <LivePreview />
         <LiveError css={tw`m-0! p-0! rounded-none!`} />
       </div>
