@@ -1,20 +1,19 @@
 import tw, { styled } from "twin.macro";
 import { Link, PageProps } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import normalize from "normalize-path";
 import Layout from "./layout";
 import Card from "./card";
 import Alert from "./alert";
 import Tag from "./tag";
 import mdxComponents from "./mdx-components";
-import { MDXProvider } from "@mdx-js/react";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import normalize from "normalize-path";
+import { useLimeConfig } from "../hooks";
 
 type PostPageData = {
   post: Post;
 };
-
-const Container = styled.div(tw`md:(w-[70ch] mt-6 mx-auto)`);
 
 const Article = styled.article(tw`p-4`);
 
@@ -33,7 +32,7 @@ const PostPage = ({ data }: PageProps<PostPageData>) => {
 
   return (
     <Layout>
-      <Container>
+      <div tw="mt-4">
         <Card rounded css={tw`lt-md:(rounded-none shadow-none)`}>
           {banner && <GatsbyImage image={banner} alt="" />}
           <MDXProvider components={mdxComponents}>
@@ -70,7 +69,7 @@ const PostPage = ({ data }: PageProps<PostPageData>) => {
             </Article>
           </MDXProvider>
         </Card>
-      </Container>
+      </div>
     </Layout>
   );
 };
