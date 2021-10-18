@@ -51,7 +51,7 @@ export default (props: LayoutProps) => {
       <div tw="mt-12 overflow-auto">
         <Container>
           {isMdScreen ? (
-            <div tw="w-[240px] lg:w-[320px] mt-4 mr-2">
+            <div tw="w-[240px] lg:w-[280px] mt-4 mr-2">
               <aside>
                 <ProfileCard />
               </aside>
