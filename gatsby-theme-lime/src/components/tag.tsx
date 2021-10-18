@@ -1,10 +1,11 @@
+import { ReactNode } from "react";
 import tw, { styled, TwStyle } from "twin.macro";
 
 type Variant = "filled" | "outline";
 
 interface TagProps {
   className?: string;
-  tag: string;
+  tag: ReactNode;
   count?: number;
   variant?: Variant;
 }
