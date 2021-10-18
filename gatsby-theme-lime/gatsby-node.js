@@ -347,6 +347,7 @@ exports.onCreateNode = async (
 
 const homepageTemplate = require.resolve(`./src/templates/homepage.tsx`);
 const postPageTemplate = require.resolve(`./src/templates/post-page.tsx`);
+const tagsPageTemplate = require.resolve(`./src/templates/tags-page.tsx`);
 
 /**
  * @type {import("gatsby").GatsbyNode["createPages"]}
@@ -370,6 +371,12 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
           slug
         }
       }
+      tags: allPost(sort: { fields: [tags___name], order: DESC }) {
+        group(field: tags___name) {
+          tag: fieldValue
+          totalCount
+        }
+      }
     }
   `);
 
@@ -388,6 +395,24 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
         id: post.id,
       },
     });
+  });
+
+  const tags = result.data.tags.group.map(({ tag, totalCount }) => {
+    return {
+      tag: {
+        name: tag,
+        slug: slugify(tag),
+      },
+      totalCount,
+    };
+  });
+
+  createPage({
+    path: normalize(`/${basePath}/${tagsPath}`),
+    component: tagsPageTemplate,
+    context: {
+      tags,
+    },
   });
 };
 
