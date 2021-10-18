@@ -7,6 +7,7 @@ export const useLimeConfig = () => {
         basePath
         blogPath
         postsPath
+        postsPrefix
         pagesPath
         resourcesPath
         tagsPath

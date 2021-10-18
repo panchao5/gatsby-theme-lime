@@ -17,7 +17,7 @@ interface PostPreviewCardProps {
 }
 
 const PostPreviewCard = ({ className, post }: PostPreviewCardProps) => {
-  const { blogPath } = useLimeConfig();
+  const { postsPrefix } = useLimeConfig();
   const showTags = post.tags && post.tags.length > 0;
 
   return (
@@ -26,7 +26,7 @@ const PostPreviewCard = ({ className, post }: PostPreviewCardProps) => {
         <Title>
           <Link
             tw="styled-underline"
-            to={normalize(`/${blogPath}/${post.slug}`)}
+            to={normalize(`/${postsPrefix}${post.slug}`)}
           >
             {post.title}
           </Link>

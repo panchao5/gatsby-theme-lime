@@ -41,17 +41,14 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
 
     const parsedPath = path.parse(fileRelativePath);
 
-    const relevantPath = path.posix.join(
-      ..._.map(
-        [
-          ..._.split(parsedPath.dir, path.sep),
-          parsedPath.name !== "index" && parsedPath.name,
-        ].filter(Boolean),
-        slugify
-      )
-    );
+    let relevantPath;
+    if (parsedPath.name === `index`) {
+      relevantPath = fileRelativePath.replace(parsedPath.base, ``);
+    } else {
+      relevantPath = fileRelativePath.replace(parsedPath.ext, ``);
+    }
 
-    return relevantPath;
+    return slugify(relevantPath);
   };
 
   createFieldExtension({
@@ -101,6 +98,7 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
       basePath: String
       blogPath: String
       postsPath: String
+      postsPrefix: String
       pagesPath: String
       resourcesPath: String
       tagsPath: String
@@ -227,6 +225,7 @@ exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
     basePath,
     blogPath,
     postsPath,
+    postsPrefix,
     pagesPath,
     resourcesPath,
     tagsPath,
@@ -237,6 +236,7 @@ exports.sourceNodes = ({ actions, createContentDigest }, themeOptions) => {
     basePath,
     blogPath,
     postsPath,
+    postsPrefix,
     pagesPath,
     resourcesPath,
     tagsPath,
@@ -382,7 +382,7 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
 
   posts.forEach((post) => {
     createPage({
-      path: normalize(`/${blogPath}/${post.slug}`),
+      path: normalize(`/${postsPrefix}${post.slug}`),
       component: postPageTemplate,
       context: {
         id: post.id,

@@ -2,6 +2,7 @@ interface LimeConfig {
   basePath: string;
   blogPath: string;
   postsPath: string;
+  postsPrefix: string;
   pagesPath: string;
   resourcesPath: string;
   tagsPath: string;
