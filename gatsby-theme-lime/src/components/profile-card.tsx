@@ -15,7 +15,7 @@ function useStatistics() {
     query StatisticsQuery {
       allPost {
         totalCount
-        group(field: tags) {
+        group(field: tags___name) {
           fieldValue
         }
       }
