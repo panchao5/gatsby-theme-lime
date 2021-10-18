@@ -6,6 +6,7 @@ import Card from "./card";
 import Avatar from "./avatar";
 import Statistic from "./statistic";
 import SocialLogo from "./social-logo";
+import { POSTS_COUNT, TAGS_COUNT } from "../constants";
 
 function useStatistics() {
   const data = useStaticQuery<{
@@ -85,8 +86,8 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
         <div
           css={tw`py-2 flex text-center divide-x --tw-divide-x-reverse[0.1]`}
         >
-          <Statistic css={tw`flex-1 w-1/2`} title="博文数" value={postsCount} />
-          <Statistic css={tw`flex-1 w-1/2`} title="标记数" value={tagsCount} />
+          <Statistic tw="flex-1 w-1/2" title={POSTS_COUNT} value={postsCount} />
+          <Statistic tw="flex-1 w-1/2" title={TAGS_COUNT} value={tagsCount} />
         </div>
       </div>
     </Card>
