@@ -46,7 +46,7 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
   const avatarImage = getImage(siteMetadata.authorAvatar);
 
   return (
-    <Card rounded className={className} css={tw`max-w-[320px] min-w-[288px]`}>
+    <Card rounded className={className} css={tw`max-w-[320px] min-w-[240px]`}>
       <CardContent css={tw`p-0`}>
         <div css={tw`aspect-w-16 aspect-h-12`}>
           <div>
@@ -60,10 +60,10 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
             ></StaticImage>
             {avatarImage && (
               <Avatar
-                css={tw`absolute left-1/2 ml-[-54px] bottom-[25%] mb-[-54px]`}
+                css={tw`absolute left-1/2 ml-[-48px] bottom-[25%] mb-[-48px]`}
                 image={avatarImage}
                 alt={siteMetadata.author}
-                size={108}
+                size={96}
               />
             )}
           </div>
@@ -84,7 +84,7 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
 
         <div css={tw`p-4`}>
           <div
-            css={tw`py-4 flex text-center divide-x --tw-divide-x-reverse[0.1]`}
+            css={tw`py-2 flex text-center divide-x --tw-divide-x-reverse[0.1]`}
           >
             <Statistic
               css={tw`flex-1 w-1/2`}

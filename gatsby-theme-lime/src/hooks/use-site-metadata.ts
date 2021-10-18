@@ -6,7 +6,7 @@ type QueryResult = {
   };
 };
 
-function useSiteMetadata() {
+export function useSiteMetadata() {
   const {
     site: { siteMetadata },
   } = useStaticQuery<QueryResult>(graphql`
