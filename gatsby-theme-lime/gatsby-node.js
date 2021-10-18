@@ -348,6 +348,7 @@ exports.onCreateNode = async (
 const homepageTemplate = require.resolve(`./src/templates/homepage.tsx`);
 const postPageTemplate = require.resolve(`./src/templates/post-page.tsx`);
 const tagsPageTemplate = require.resolve(`./src/templates/tags-page.tsx`);
+const tagPageTemplate = require.resolve(`./src/templates/tag-page.tsx`);
 
 /**
  * @type {import("gatsby").GatsbyNode["createPages"]}
@@ -413,6 +414,17 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
     context: {
       tags,
     },
+  });
+
+  tags.forEach(({ tag }) => {
+    createPage({
+      path: normalize(`/${basePath}/${tagsPath}/${tag.slug}`),
+      component: tagPageTemplate,
+      context: {
+        tagName: tag.name,
+        tagSlug: tag.slug,
+      },
+    });
   });
 };
 

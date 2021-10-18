@@ -17,7 +17,7 @@ interface PostPreviewCardProps {
 }
 
 const PostPreviewCard = ({ className, post }: PostPreviewCardProps) => {
-  const { postsPrefix } = useLimeConfig();
+  const { basePath, tagsPath, postsPrefix } = useLimeConfig();
   const showTags = post.tags && post.tags.length > 0;
 
   return (
@@ -38,7 +38,10 @@ const PostPreviewCard = ({ className, post }: PostPreviewCardProps) => {
         <CardFooter>
           <TagList>
             {post.tags.map((tag) => (
-              <Link key={tag.slug} to={tag.slug}>
+              <Link
+                key={tag.slug}
+                to={normalize(`/${basePath}/${tagsPath}/${tag.slug}`)}
+              >
                 <Tag tag={tag.name} />
               </Link>
             ))}

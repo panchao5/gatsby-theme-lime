@@ -24,6 +24,8 @@ const Meta = styled.div(tw`mb-2 text-gray-500 text-sm space-x-4`);
 const Content = styled.div("markdown", tw`prose max-w-none`);
 
 const PostPage = ({ data }: PageProps<PostPageData>) => {
+  const { basePath, tagsPath } = useLimeConfig();
+
   const { post } = data;
 
   const showTags = post.tags && post.tags.length > 0;
@@ -59,7 +61,10 @@ const PostPage = ({ data }: PageProps<PostPageData>) => {
                 <footer>
                   <div tw="mt-4 space-x-2">
                     {post.tags.map((tag) => (
-                      <Link key={tag.name} to={normalize(`/posts/${tag.slug}`)}>
+                      <Link
+                        key={tag.name}
+                        to={normalize(`/${basePath}/${tagsPath}/${tag.slug}`)}
+                      >
                         <Tag tag={tag.name} />
                       </Link>
                     ))}

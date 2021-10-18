@@ -2,8 +2,10 @@ import Layout from "./layout";
 import "twin.macro";
 import { Link, PageProps } from "gatsby";
 import { groupBy, toUpper } from "lodash";
+import normalize from "normalize-path";
 import Card from "./card";
 import Tag from "./tag";
+import { useLimeConfig } from "../hooks";
 import { ALL_TAGS } from "../constants";
 
 type TagsPageContext = {
@@ -14,6 +16,8 @@ type TagsPageContext = {
 };
 
 const TagsPage = (props: PageProps<undefined, TagsPageContext>) => {
+  const { basePath, tagsPath } = useLimeConfig();
+
   const { tags } = props.pageContext;
 
   const tagsGroup = groupBy(tags, ({ tag, totalCount }) => {
@@ -29,11 +33,14 @@ const TagsPage = (props: PageProps<undefined, TagsPageContext>) => {
             .sort()
             .map((init) => {
               return (
-                <article>
+                <article key={init}>
                   <h2 tw="mb-2 text-gray-700 text-lg font-medium">{init}</h2>
                   <div tw="space-x-2">
                     {tagsGroup[init].map(({ tag, totalCount }) => (
-                      <Link key={tag.slug} to={tag.slug}>
+                      <Link
+                        key={tag.slug}
+                        to={normalize(`/${basePath}/${tagsPath}/${tag.slug}`)}
+                      >
                         <Tag
                           variant="outline"
                           tag={
