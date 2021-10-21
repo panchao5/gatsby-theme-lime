@@ -372,6 +372,7 @@ const createPostListPages = ({
 
 const homepageTemplate = require.resolve(`./src/templates/homepage.tsx`);
 const postPageTemplate = require.resolve(`./src/templates/post-page.tsx`);
+const archivePageTemplate = require.resolve(`./src/templates/archive-page.tsx`);
 const tagsPageTemplate = require.resolve(`./src/templates/tags-page.tsx`);
 const tagPageTemplate = require.resolve(`./src/templates/tag-page.tsx`);
 
@@ -396,6 +397,7 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
           id
           slug
         }
+        postCount: totalCount
       }
       tags: allPost(sort: { fields: [tags___name], order: DESC }) {
         group(field: tags___name) {
@@ -411,7 +413,7 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
     return;
   }
 
-  const posts = result.data.allPost.nodes;
+  const { nodes: posts, postCount } = result.data.allPost;
 
   posts.forEach((post) => {
     createPage({
@@ -442,6 +444,15 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
   });
 
   const postsPerPage = 5;
+
+  createPostListPages({
+    createPage,
+    postCount,
+    postsPerPage,
+    getPath: (i) =>
+      normalize(`/${basePath}/${blogPath}${i > 1 ? `/${i}` : ""}`),
+    component: archivePageTemplate,
+  });
 
   tags.forEach(({ tag, postCount }) => {
     createPostListPages({
