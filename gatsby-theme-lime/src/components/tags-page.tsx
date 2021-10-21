@@ -8,17 +8,17 @@ import Tag from "./tag";
 import { useLimeConfig } from "../hooks";
 import { ALL_TAGS } from "../constants";
 
-type TagsPageContext = {
+type TagsPageData = {
   tags: Array<{
     tag: PostTag;
     totalCount: number;
   }>;
 };
 
-const TagsPage = (props: PageProps<undefined, TagsPageContext>) => {
+const TagsPage = (props: PageProps<TagsPageData>) => {
   const { basePath, tagsPath } = useLimeConfig();
 
-  const { tags } = props.pageContext;
+  const { tags } = props.data;
 
   const tagsGroup = groupBy(tags, ({ tag, totalCount }) => {
     return toUpper(tag.name[0]);
