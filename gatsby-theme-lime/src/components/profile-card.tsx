@@ -28,12 +28,12 @@ function useStatistics() {
     }
   `);
 
-  const postsCount = data.allPost.totalCount;
-  const tagsCount = data.allPost.group.length;
+  const postCount = data.allPost.totalCount;
+  const tagCount = data.allPost.group.length;
 
   return {
-    postsCount,
-    tagsCount,
+    postCount,
+    tagCount,
   };
 }
 
@@ -43,7 +43,7 @@ interface ProfileCardProps {
 
 const ProfileCard = ({ className }: ProfileCardProps) => {
   const siteMetadata = useSiteMetadata();
-  const { postsCount, tagsCount } = useStatistics();
+  const { postCount, tagCount } = useStatistics();
   const avatarImage = getImage(siteMetadata.authorAvatar);
 
   return (
@@ -86,8 +86,8 @@ const ProfileCard = ({ className }: ProfileCardProps) => {
         <div
           css={tw`py-2 flex text-center divide-x --tw-divide-x-reverse[0.1]`}
         >
-          <Statistic tw="flex-1 w-1/2" title={POSTS_COUNT} value={postsCount} />
-          <Statistic tw="flex-1 w-1/2" title={TAGS_COUNT} value={tagsCount} />
+          <Statistic tw="flex-1 w-1/2" title={POSTS_COUNT} value={postCount} />
+          <Statistic tw="flex-1 w-1/2" title={TAGS_COUNT} value={tagCount} />
         </div>
       </div>
     </Card>
