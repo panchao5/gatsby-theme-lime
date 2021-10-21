@@ -345,6 +345,31 @@ exports.onCreateNode = async (
   }
 };
 
+const createPostListPages = ({
+  createPage,
+  postCount,
+  postsPerPage,
+  getPath,
+  component,
+  context = {},
+}) => {
+  const pageCount = Math.ceil(postCount / postsPerPage);
+
+  Array.from({ length: pageCount }).forEach((_, i) => {
+    createPage({
+      path: getPath(i + 1),
+      component,
+      context: {
+        ...context,
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        pageCount,
+        current: i + 1,
+      },
+    });
+  });
+};
+
 const homepageTemplate = require.resolve(`./src/templates/homepage.tsx`);
 const postPageTemplate = require.resolve(`./src/templates/post-page.tsx`);
 const tagsPageTemplate = require.resolve(`./src/templates/tags-page.tsx`);
@@ -416,13 +441,21 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
     },
   });
 
-  tags.forEach(({ tag }) => {
-    createPage({
-      path: normalize(`/${basePath}/${tagsPath}/${tag.slug}`),
+  const postsPerPage = 5;
+
+  tags.forEach(({ tag, totalCount }) => {
+    createPostListPages({
+      createPage,
+      postCount: totalCount,
+      postsPerPage,
+      getPath: (i) =>
+        normalize(
+          `/${basePath}/${tagsPath}/${tag.slug}${i > 1 ? `/${i}` : ""}`
+        ),
       component: tagPageTemplate,
       context: {
-        tagName: tag.name,
-        tagSlug: tag.slug,
+        tag,
+        tag_: tag.slug,
       },
     });
   });
