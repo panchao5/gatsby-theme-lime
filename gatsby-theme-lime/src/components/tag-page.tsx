@@ -10,7 +10,7 @@ import Card from "./card";
 import { POSTS_BY_TAG, SEE_ALL_TAGS } from "../constants";
 
 type TagPageData = {
-  posts: {
+  allPost: {
     nodes: Array<PostPreview>;
   };
 };
@@ -25,7 +25,7 @@ const TagPage = (props: PageProps<TagPageData, TagPageContext>) => {
   const { basePath, tagsPath } = useLimeConfig();
 
   const { tag, current, pageCount } = props.pageContext;
-  const posts = props.data.posts.nodes;
+  const posts = props.data.allPost.nodes;
 
   const handleChange = (page: number) =>
     navigate(

@@ -400,7 +400,7 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
       tags: allPost(sort: { fields: [tags___name], order: DESC }) {
         group(field: tags___name) {
           tag: fieldValue
-          totalCount
+          postCount: totalCount
         }
       }
     }
@@ -423,13 +423,13 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
     });
   });
 
-  const tags = result.data.tags.group.map(({ tag, totalCount }) => {
+  const tags = result.data.tags.group.map(({ tag, postCount }) => {
     return {
       tag: {
         name: tag,
         slug: slugify(tag),
       },
-      totalCount,
+      postCount,
     };
   });
 
@@ -443,10 +443,10 @@ exports.createPages = async ({ actions, graphql, reporter }, themeOptions) => {
 
   const postsPerPage = 5;
 
-  tags.forEach(({ tag, totalCount }) => {
+  tags.forEach(({ tag, postCount }) => {
     createPostListPages({
       createPage,
-      postCount: totalCount,
+      postCount,
       postsPerPage,
       getPath: (i) =>
         normalize(

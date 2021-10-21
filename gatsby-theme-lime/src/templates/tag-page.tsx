@@ -5,8 +5,8 @@ export default TagPage;
 
 export const query = graphql`
   query PostPageQuery($tag_: String!, $limit: Int!, $skip: Int!) {
-    posts: allPost(
-      sort: { fields: [date] }
+    allPost(
+      sort: { fields: [date], order: DESC }
       filter: { tags: { elemMatch: { slug: { eq: $tag_ } } } }
       limit: $limit
       skip: $skip
